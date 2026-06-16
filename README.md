@@ -1,70 +1,85 @@
-Virtual Ear Tool
+# 🎧 Virtual Ear Tool
 
-Graba reuniones y genera transcripciones locales usando FFmpeg y Faster Whisper.
+Graba reuniones y genera transcripciones locales usando **FFmpeg** y **Faster Whisper**.
 
-Características
-Grabación de audio del sistema y micrófono.
-Transcripción local usando Whisper.
-Soporte CPU y GPU NVIDIA (CUDA).
-Sin servicios externos.
-Compatible con Windows y Linux.
-Requisitos
-FFmpeg
+---
+
+## ✨ Características
+
+- 🎙️ Grabación de audio del sistema y micrófono
+- 🧠 Transcripción local usando Whisper
+- ⚡ Soporte para CPU y GPU NVIDIA (CUDA)
+- 🔒 No utiliza servicios externos
+- 🖥️ Compatible con Windows y Linux
+
+---
+
+## 📦 Requisitos
+
+### FFmpeg
 
 Verificar instalación:
 
+```bash
 ffmpeg -version
-Python
+```
+
+## Python
+Verificar versión:
+```bash
 python --version
+```
 
-Recomendado:
-
-Python 3.12+
-UV
-
-Verificar:
-
+## UV
+Verificar instalación:
+```bash
 uv --version
-
+```
 Instalar:
-
+```bash
 pip install uv
-Instalación
+```
 
-Clonar repositorio:
-
-git clone <repo>
+🚀 Instalación
+Clonar el repositorio:
+```bash
+git clone https://github.com/MartinezRobledo/Virtual-Ear.git
 cd virtual-ear
+```
 
 Crear entorno e instalar dependencias:
-
+```bash
 uv sync
-Configuración
+```
 
+## ⚙️ Configuración
 Archivo:
-
 config.yaml
 
 Ejemplo:
-
+```yaml
 whisper:
   model: large-v3
   device: cuda
 
 audio:
   sample_rate: 16000
-Dispositivos válidos
+```
+
+🧩 Dispositivos válidos
+```yaml
 device: cpu
 device: cuda
 device: auto
-Diagnóstico
+```
 
+## 🩺 Diagnóstico
 Ejecutar:
-
+```bash
 uv run earing doctor
+```
 
-Ejemplo:
-
+Ejemplo de salida:
 ✓ ffmpeg
 ✓ audio sistema
 ✓ micrófono
@@ -72,75 +87,51 @@ Ejemplo:
 ✓ transcripts/
 ✓ whisper
 ✓ cuda
-Grabar una reunión
 
-Iniciar:
-
+🎙️ Grabar una reunión
+Iniciar grabación:
+```bash
 uv run earing start
-
-Detener:
-
+```
+Detener grabación:
+```bash
 uv run earing stop
-
+```
 Archivo generado:
-
 recordings/
-Transcribir
+
+## 📝 Transcribir
+```bash
 uv run earing transcribe recordings/meeting.wav
-
+```
 Salida:
-
 transcripts/meeting.md
-GPU NVIDIA (Opcional)
+
+## 🚀 GPU NVIDIA (Opcional)
 Verificar GPU
+```bash
 nvidia-smi
-
+```
 Debe mostrar algo similar a:
-
 CUDA Version: 12.x
 
-o superior.
-
 Instalar CUDA
-
-Faster Whisper actualmente requiere bibliotecas CUDA 12.
-
+Faster Whisper requiere actualmente bibliotecas CUDA 12.
 Instalar:
 
 CUDA Toolkit 12.9
 
-Verificar:
-
+### Verificar instalación
+```bash
 Get-ChildItem `
 "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.9" `
 -Recurse `
 -Filter cublas64_12.dll
-
+```
 Debe existir:
+- cublas64_12.dll
 
-cublas64_12.dll
-Problemas conocidos
-CUDA runtime not found
-
-Error:
-
-RuntimeError:
-CUDA runtime not found
-
-Solución:
-
-Instalar CUDA 12.x.
-Verificar que exista:
-cublas64_12.dll
-Transcripción incorrecta
-
-Si el audio contiene largos períodos de silencio:
-
-vad_filter=True
-
-puede mejorar significativamente los resultados.
-
-Arquitectura
+## 🏗️ Arquitectura
 virtual_ear/
 ├── cli.py
 ├── recorder.py
@@ -151,45 +142,30 @@ virtual_ear/
 recordings/
 transcripts/
 config.yaml
-Flujo típico
-uv run earing doctor
 
-uv run earing start
-
-uv run earing stop
-
-uv run earing transcribe recordings/meeting.wav
-
-
-Audio en Windows
+## 🎧 Audio en Windows
 Capturar audio del sistema
-
 Instalar:
-
-VB-Cable
+- VB-Cable
 
 Configurar:
-
 Windows Output
     ↓
 CABLE Input
     ↓
 FFmpeg
-Capturar micrófono
 
+
+## 🎤 Capturar micrófono
 Seleccionar:
-
-Micrófono (NVIDIA Broadcast)
-
+Micrófono virtual
 o
-
 Micrófono físico
-Escuchar mientras se graba
 
+
+## 🔊 Escuchar mientras se graba
 Activar:
-
-Escuchar este dispositivo
+"Escuchar este dispositivo"
 
 sobre:
-
 CABLE Output
