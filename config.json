@@ -1,0 +1,10 @@
+{
+  "audio": {
+    "system": "CABLE Output (VB-Audio Virtual Cable)",
+    "microphone": "Micrófono (NVIDIA Broadcast)"
+  },
+  "whisper": {
+    "model": "large-v3",
+    "device": "cuda"
+  }
+}

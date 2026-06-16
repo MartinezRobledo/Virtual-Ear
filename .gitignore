@@ -1,0 +1,84 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# =========================
+# Virtual environments
+# =========================
+.venv/
+venv/
+env/
+
+# =========================
+# Build
+# =========================
+build/
+dist/
+*.egg-info/
+
+# =========================
+# Testing
+# =========================
+.pytest_cache/
+.coverage
+htmlcov/
+
+# =========================
+# IDEs
+# =========================
+.vscode/
+.idea/
+
+# =========================
+# OS
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# Application data
+# =========================
+recordings/*
+transcripts/*
+
+# Mantener directorios vacíos
+!recordings/.gitkeep
+!transcripts/.gitkeep
+
+# =========================
+# Local config
+# =========================
+config.local.yaml
+.env
+.env.*
+
+# =========================
+# Hugging Face / Whisper
+# =========================
+.cache/
+hf_cache/
+models/
+
+# =========================
+# Runtime files
+# =========================
+*.pid
+*.lock
+state.json
+
+# =========================
+# Temporary audio
+# =========================
+*.wav.tmp
+*.pcm
+*.raw
