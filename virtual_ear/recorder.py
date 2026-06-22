@@ -31,4 +31,4 @@ def start(device: str, output_dir="recordings"):
     })
 
     print("🎙️ Recording started")
-    print("→ run: meeting stop")
+    print("→ run: earing stop")

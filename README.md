@@ -54,16 +54,20 @@ uv sync
 
 ## ⚙️ Configuración
 Archivo:
-config.yaml
+config.json
 
 Ejemplo:
-```yaml
-whisper:
-  model: large-v3
-  device: cuda
-
-audio:
-  sample_rate: 16000
+```json
+{
+  "audio": {
+    "system": "Voicemeeter Out B1 (VB-Audio Voicemeeter VAIO)",
+    "microphone": "Micrófono (NVIDIA Broadcast)"
+  },
+  "whisper": {
+    "model": "large-v3",
+    "device": "cuda"
+  }
+}
 ```
 
 🧩 Dispositivos válidos
@@ -141,31 +145,53 @@ virtual_ear/
 
 recordings/
 transcripts/
-config.yaml
+config.json
 
 ## 🎧 Audio en Windows
-Capturar audio del sistema
-Instalar:
-- VB-Cable
 
-Configurar:
-Windows Output
-    ↓
-CABLE Input
-    ↓
-FFmpeg
+### Requisito: VoiceMeeter
 
+En Windows, ffmpeg no puede capturar audio del sistema y pasártelo al mismo tiempo sin software adicional. **VoiceMeeter** resuelve esto como mixer virtual.
 
-## 🎤 Capturar micrófono
-Seleccionar:
-Micrófono virtual
-o
-Micrófono físico
+Instalar: https://vb-audio.com/Voicemeeter/
 
+### Configurar VoiceMeeter
 
-## 🔊 Escuchar mientras se graba
-Activar:
-"Escuchar este dispositivo"
+1. **Hardware Input 1**: Seleccionar el dispositivo de audio del sistema (ej: CABLE Output si usás VB-Cable)
+2. **Hardware Input 2**: Seleccionar el micrófono (ej: NVIDIA Broadcast)
+3. **Hardware Out A1**: Seleccionar tus parlantes/auriculares reales
+4. En el strip del **micrófono**: desactivar A1 (para no escucharte a vos mismo), activar B1
+5. En el strip del **sistema**: activar A1 (para escuchar) y B1 (para grabar)
 
-sobre:
-CABLE Output
+### Configurar Windows
+
+Establecer **VoiceMeeter Input (VB-Audio Voicemeeter VAIO)** como dispositivo de reproducción por defecto en Windows.
+Así todo el audio del sistema pasa por VoiceMeeter.
+
+Para capturar audio de una aplicación específica (Zoom, Teams, Chrome, etc.),
+configurá su salida de audio a **VoiceMeeter Input (VB-Audio Voicemeeter VAIO)**
+en la configuración de audio de esa aplicación.
+
+### Configurar config.json
+
+```json
+{
+  "audio": {
+    "system": "Voicemeeter Out B1 (VB-Audio Voicemeeter VAIO)"
+  }
+}
+```
+
+### Flujo de audio
+
+```
+App (Zoom, Teams, Chrome...)
+  └→ VoiceMeeter Input (VB-Audio Voicemeeter VAIO)
+       └→ VoiceMeeter
+            ├→ A1 → Parlantes (vos escuchás)
+            └→ B1 → ffmpeg (grabación)
+```
+
+> **Tip**: Si querés capturar solo el audio de una app específica (ej: Zoom),
+> configurá esa app para que use **VoiceMeeter Input** como salida de audio.
+> El resto del sistema no se ve afectado.

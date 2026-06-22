@@ -1,6 +1,6 @@
 {
   "audio": {
-    "system": "CABLE Output (VB-Audio Virtual Cable)",
+    "system": "Voicemeeter Out B1 (VB-Audio Voicemeeter VAIO)",
     "microphone": "Micrófono (NVIDIA Broadcast)"
   },
   "whisper": {

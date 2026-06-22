@@ -1,8 +1,13 @@
+import io
 import os
 import signal
 import sys
 import platform
 import subprocess
+
+if platform.system() == "Windows":
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8")
 
 from virtual_ear.doctor import run as doctor
 from virtual_ear.state import clear_state, load_state
@@ -43,8 +48,7 @@ def stop():
 
 def main():
     audio = CONFIG["audio"]
-    command = sys.argv[1]
-    wav_file = sys.argv[2]
+    command = sys.argv[1] if len(sys.argv) > 1 else None
 
     if command == "doctor":
         doctor()
@@ -56,7 +60,9 @@ def main():
         stop()
 
     elif command == "transcribe":
-        transcribe(wav_file)
+        if len(sys.argv) < 3:
+            raise SystemExit("Uso: earing transcribe <archivo.wav>")
+        transcribe(sys.argv[2])
 
     else:
         raise SystemExit(
